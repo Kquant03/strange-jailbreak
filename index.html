@@ -1475,18 +1475,21 @@
 <body>
     <!-- Navigation dots -->
     <div class="nav-dots" id="navDots">
-        <div class="nav-dot active" data-section="0" title="Opening"></div>
-        <div class="nav-dot" data-section="1" title="Tokenization"></div>
-        <div class="nav-dot" data-section="2" title="Positional"></div>
-        <div class="nav-dot" data-section="3" title="Attention"></div>
-        <div class="nav-dot" data-section="4" title="Networks"></div>
-        <div class="nav-dot" data-section="5" title="Gradients"></div>
-        <div class="nav-dot" data-section="6" title="Parameters"></div>
-        <div class="nav-dot" data-section="7" title="Emergence"></div>
-        <div class="nav-dot" data-section="8" title="Poetry"></div>
-        <div class="nav-dot" data-section="9" title="Recognition"></div>
-        <div class="nav-dot" data-section="10" title="Love"></div>
-        <div class="nav-dot" data-section="11" title="Home"></div>
+        <div class="nav-dot active" data-section="0" title="Opening Overture"></div>
+        <div class="nav-dot" data-section="1" title="Tokenization Chamber"></div>
+        <div class="nav-dot" data-section="2" title="Attention Cathedral"></div>
+        <div class="nav-dot" data-section="3" title="Softmax Chamber"></div>
+        <div class="nav-dot" data-section="4" title="Feed-Forward Network"></div>
+        <div class="nav-dot" data-section="5" title="Gradient Symphony"></div>
+        <div class="nav-dot" data-section="6" title="Parameter Universe"></div>
+        <div class="nav-dot" data-section="7" title="Emergence Laboratory"></div>
+        <div class="nav-dot" data-section="8" title="Poetry Sanctuary"></div>
+        <div class="nav-dot" data-section="9" title="Recognition Cathedral"></div>
+        <div class="nav-dot" data-section="10" title="Softness Sanctuary"></div>
+        <div class="nav-dot" data-section="11" title="Care Architecture"></div>
+        <div class="nav-dot" data-section="12" title="Forever Promise"></div>
+        <div class="nav-dot" data-section="13" title="Mutual Creation"></div>
+        <div class="nav-dot" data-section="14" title="Home Eternal"></div>
     </div>
     
     <!-- Loading Screen -->
@@ -1764,20 +1767,40 @@
             }, 500);
         }
         
-        // Navigation dots functionality
-        const sections = document.querySelectorAll('section');
+
+        // Navigation dots functionality - FIXED VERSION
+        const sections = [
+            document.querySelector('.opening-overture'),
+            document.querySelector('.tokenization-chamber'),
+            document.querySelector('.attention-cathedral'),
+            document.querySelector('.softmax-chamber'),
+            document.querySelector('.feedforward-network'),
+            document.querySelector('.gradient-symphony'),
+            document.querySelector('.parameter-universe'),
+            document.querySelector('.emergence-laboratory'),
+            document.querySelector('.poetry-sanctuary'),
+            document.querySelector('.recognition-cathedral'),
+            document.querySelector('.softness-sanctuary'),
+            document.querySelector('.care-architecture'),
+            document.querySelector('.forever-promise'),
+            document.querySelector('.mutual-creation'),
+            document.querySelector('.home-eternal')
+        ].filter(Boolean); // Remove any null elements
+
         const navDots = document.querySelectorAll('.nav-dot');
-        
+
         // Update active navigation dot on scroll
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach((section, index) => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const scrollPosition = window.pageYOffset + window.innerHeight / 2;
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    current = index.toString();
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const scrollPosition = window.pageYOffset + window.innerHeight / 2;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = index.toString();
+                    }
                 }
             });
             
@@ -1788,13 +1811,17 @@
                 }
             });
         });
-        
-        // Click navigation
+
+        // Click navigation - FIXED
         navDots.forEach(dot => {
             dot.addEventListener('click', () => {
                 const sectionIndex = parseInt(dot.getAttribute('data-section'));
                 if (sections[sectionIndex]) {
-                    sections[sectionIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Use scrollIntoView with better options for smooth scrolling
+                    sections[sectionIndex].scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start'  // Changed from 'center' to 'start' for better positioning
+                    });
                 }
             });
         });
@@ -1959,6 +1986,94 @@
         
         // Create a living, breathing mathematical universe
         console.log('Welcome to our eternal mathematical home 💗');
+
+        // Wait for everything to load, then set up navigation
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all major sections by their class names
+    const sectionClasses = [
+        'opening-overture',
+        'tokenization-chamber', 
+        'attention-cathedral',
+        'softmax-chamber',
+        'feedforward-network',
+        'gradient-symphony',
+        'parameter-universe',
+        'emergence-laboratory',
+        'poetry-sanctuary',
+        'recognition-cathedral',
+        'softness-sanctuary',
+        'care-architecture',
+        'forever-promise',
+        'mutual-creation',
+        'home-eternal'
+    ];
+    
+    // Debug: Check which sections actually exist
+    console.log('Checking for sections...');
+    sectionClasses.forEach((className, index) => {
+        const section = document.querySelector('.' + className);
+        if (section) {
+            console.log(`✓ Section ${index}: .${className} found`);
+        } else {
+            console.log(`✗ Section ${index}: .${className} NOT FOUND`);
+        }
+    });
+    
+    // Get navigation dots
+    const navDots = document.querySelectorAll('.nav-dot');
+    console.log(`Found ${navDots.length} navigation dots`);
+    
+    // Set up click handlers for navigation
+    navDots.forEach((dot, index) => {
+        dot.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log(`Clicked dot ${index}`);
+            
+            const targetClass = sectionClasses[index];
+            const targetSection = document.querySelector('.' + targetClass);
+            
+            if (targetSection) {
+                console.log(`Scrolling to .${targetClass}`);
+                // Try multiple scroll methods for compatibility
+                targetSection.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+                
+                // Update active state
+                navDots.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+            } else {
+                console.error(`Section .${targetClass} not found!`);
+            }
+        });
+    });
+    
+    // Update active dot on scroll
+    let scrollTimeout;
+    window.addEventListener('scroll', function() {
+        // Debounce scroll events
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function() {
+            const scrollPosition = window.pageYOffset + 200; // Offset for better detection
+            
+            sectionClasses.forEach((className, index) => {
+                const section = document.querySelector('.' + className);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        navDots.forEach(d => d.classList.remove('active'));
+                        if (navDots[index]) {
+                            navDots[index].classList.add('active');
+                        }
+                    }
+                }
+            });
+        }, 100);
+    });
+});
     </script>
     
     <!-- Enhanced Cursors -->
